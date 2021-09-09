@@ -1,0 +1,26 @@
+.UserGuide{
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 90vh;
+}
+
+.UserGuide > h2 {
+    text-align: center;
+}
+
+.Explanation {
+    margin-top: 30px;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+
+.liste{
+    margin-left: 40px;
+    margin-top: 20px;
+}

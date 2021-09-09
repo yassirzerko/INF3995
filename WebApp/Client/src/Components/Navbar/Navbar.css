@@ -1,0 +1,154 @@
+.NavbarItems {
+    background: rgba(73,63,252,1);
+    /*background-color:rgba(1, 50, 67, 1);*/
+    height: 80px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    font-size:1.2rem;
+    color:white;
+}
+
+.NavbarItems > a{
+    text-decoration: none;
+    color :white;
+}
+
+.navbar-logo{
+    justify-self:start;
+    margin-left: 20px;
+    cursor:pointer;
+    font-size:1.2rem;
+    display:block;
+}
+
+.nav-menu {
+    display:grid;
+    grid-template-columns: repeat(5,auto);
+    grid-gap:10px;
+    list-style:none;
+    text-align: center;
+    width: 70vw;
+    justify-content:end;
+    margin-right: 2rem;
+    
+}
+
+.nav-links{
+    color:white;
+    text-decoration:none;
+    padding: 0.5rem 1rem;
+}
+
+.nav-links:hover{
+    background-color:rgba(107, 185, 240, 1);
+    transition: all 0.2s ease-out;
+    border-radius: 4px;
+    
+}
+
+.fa-bars{
+    color:white;
+}
+
+.nav-links-mobile{
+    display:none
+}
+
+.menu-icon{
+    display:none;
+}
+
+.navbar-logo-mobile{
+    display:none;
+}
+
+.navbar-logo-other{
+    display: inline-block;
+    height: 40px;
+    margin: 10px 0;
+    left:0px;
+    margin: 30px;
+}
+
+@media screen and (max-width: 1024px){
+    .NavbarItems{
+        position: relative;
+        justify-content:left;
+        align-items:left;
+
+    }
+
+    .navbar-logo{
+        margin:0px;
+    }
+
+    .navbar-logo-other{
+        justify-self:start;
+        height: 40px;
+        margin: 10px 0;
+        left:0px;
+        margin: 30px;
+    }
+
+    .nav-menu{
+        display: flex;
+        flex-direction:column;
+        width: 100%;
+        position: absolute;
+        top: 80px;
+        left: -200%;
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
+
+    .nav-menu.active{
+        background: 7577fa;
+        left: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index:1;
+        background:rgba(73,63,252,1);
+    }
+
+    .nav-links {
+        text-align: center;
+        width: 100%;
+        display: table;
+        background: ;
+    }
+
+    .nav-links:hover{
+        background-color: #7577fa;
+        border-radius: 0;
+
+    }
+
+    .menu-icon{
+        display: block;
+        position: absolute;
+        top:0;
+        right:0;
+        transform: translate(-100%, 60%);
+        font-size:1.8rem;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 570px){
+    .navbar-logo{
+        display:none;
+    }
+
+    .navbar-logo-other{
+        display:none;
+    }
+    
+    .navbar-logo-mobile{
+        display: inline-block;
+        height: 40px;
+        left:0px;
+        margin: 30px;
+    }
+
+}

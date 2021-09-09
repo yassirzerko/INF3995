@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+
+  server:
+    build: WebApp/Server/
+    ports: 
+      - 5000:5000
+    devices: 
+      - /dev/bus/usb/$BUS_ID
+    network_mode: host
+  
+  client:
+    build: WebApp/Client/
+    ports: 
+      - 3000:3000
+    network_mode: host
+   
+  simulation: 
+    build : 
+      context : ./Simulation
+      dockerfile: Dockerfile.production
+
+    ports:
+      - 2000:2000
+    
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    
+    environment: 
+      - DISPLAY=$DISPLAY
+    
+    privileged: true
+
+    cap_add:
+      - "SYS_PTRACE"
+    
+    security_opt:
+      - seccomp=unconfined
+    
+    network_mode: host
+
+  crazyflie:
+    build:
+      context: ./Crazyflie
+      dockerfile: Dockerfile.production
+    
+    ports: 
+      - 4000:4000
+      
+    devices: 
+      - /dev/bus/usb/$BUS_ID
+    
+    network_mode: host
+  

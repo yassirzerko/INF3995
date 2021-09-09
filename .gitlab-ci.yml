@@ -1,0 +1,34 @@
+stages:
+  - build-client
+  - test-client
+  - test-server 
+
+build-client:
+  stage: build-client
+  image: node
+  script: 
+    - echo "Start building App"
+    - cd WebApp/Client 
+    - npm install
+    - npm run build
+    - echo "Build successfully!"
+
+test-client:
+  stage: test-client
+  image: node
+  script:
+    - echo "Testing App"
+    - cd WebApp/Client 
+    - npm test
+    - echo "Test successfully!"
+
+
+
+test-server:
+  stage: test-server
+  script:
+    - apt-get update -qy
+    - apt-get install -y python-dev python-pip
+    - cd /WebApp/Server
+    - pip install -r requirements.txt
+    - python api_test.py

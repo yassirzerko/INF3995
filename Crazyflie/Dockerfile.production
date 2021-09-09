@@ -1,0 +1,73 @@
+FROM ubuntu:18.04
+LABEL crazyflie.version="1.0"
+
+# Install common dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    dpkg \ 
+    git \
+    pkg-config \
+    python3.7 \
+    python-dev \
+    python-numpy \
+    sudo \
+    software-properties-common \
+    python3-pip \
+    usbutils \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install crazyflie-firmware from source
+RUN cd /root/ &&\
+    add-apt-repository ppa:team-gcc-arm-embedded/ppa &&\
+    apt-get update &&\
+    apt install gcc-arm-embedded -y &&\
+    git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git &&\
+    cd crazyflie-firmware &&\
+    make PLATFORM=cf2
+
+# Install crazyflie-lib-clients from source 
+RUN cd /root/ &&\
+    git clone https://github.com/bitcraze/crazyflie-lib-python.git &&\
+    cd crazyflie-lib-python &&\
+    git checkout 68b27f1772f906ac76cb941ef8834ed4adb2c1a9 &&\
+    pip3 install -e . &&\
+    pip3 install -r requirements.txt
+
+# Install crazyflie-clients-python from source     
+RUN cd /root/ &&\
+    git clone https://github.com/bitcraze/crazyflie-clients-python &&\
+    cd crazyflie-clients-python &&\
+    pip3 install --upgrade pip &&\
+    python3 -m pip install --user -e .
+
+#Install server dependencies
+RUN apt-get update && apt-get install -y \
+    python3-venv \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip3 install --no-cache-dir --upgrade pip 
+
+#################################
+#          YOUR CODE            #
+#################################
+
+COPY Application/src /root/Application/src
+
+COPY Application/Makefile /root/Application/Makefile
+
+RUN cd /root/Application && make all
+
+COPY Application/requirements.txt /root/Application/requirements.txt
+
+RUN cd /root/Application && pip3 install -U -r requirements.txt
+
+COPY Application/Server /root/Application/Server
+
+WORKDIR /root/Application/Server
+
+EXPOSE 4000
+
+WORKDIR /root/Application/Server
+
+CMD exec python3 app.py

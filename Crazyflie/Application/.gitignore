@@ -1,0 +1,8 @@
+bin/
+version.c
+*.mk
+*.bin
+*.dfu
+*.elf
+*.hex
+*.map
