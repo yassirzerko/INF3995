@@ -99,5 +99,3 @@ https://gitlab.com/polytechnique-montr-al/inf3995/20211/equipe-103/inf3995-h21-3
 | R.Q.3   | ?                 |                                                                                                                                                                                                                                                                         |
 | R.Q.4   | ?                 |                                                                                                                                                                                                                                                                         |
 | Requis supplémentaire  | ?                | Nous avons réalisé un guide d'utilisation contenant des vidéos qui montrent le fonctionnement de l'application.                                                                                                                                                                                                                                                                         |
-#   I N F 3 9 9 5  
- 
